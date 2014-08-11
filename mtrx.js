@@ -1,5 +1,7 @@
 var mtrx = (function () {
 
+	"use strict";
+
 	var create = function (rows, cols) {
 
 		var matrix = _buildMatrix(rows);
@@ -11,9 +13,11 @@ var mtrx = (function () {
 
 	var identity = function(m) {
 
-		var i = 0, j = 0;
+		var i = 0, 
+			j = 0;
 
-		var rows, cols;
+		var rows, 
+			cols;
 
 		if (_isSquareMatrix(m)) {
 
@@ -42,7 +46,8 @@ var mtrx = (function () {
 
 	var scalar = function(s, m) {
 
-		var i = 0, j = 0;
+		var i = 0, 
+			j = 0;
 
 		var rows = _getNumRows(m);
 
@@ -63,9 +68,12 @@ var mtrx = (function () {
 
 	var trace = function(m) {
 
-		var i = 0, j = 0, tr = 0;
+		var i = 0, 
+			j = 0, 
+			tr = 0;
 
-		var rows, cols;
+		var rows, 
+			cols;
 
 		if (_isSquareMatrix(m)) {
 
@@ -94,7 +102,8 @@ var mtrx = (function () {
 
 		var matrix = [];
 
-		var i = 0, j = 0, temp = 0;
+		var i = 0, 
+			j = 0;
 
 		var rows = _getNumRows(m);
 
@@ -108,6 +117,23 @@ var mtrx = (function () {
 		};
 
 		return matrix;
+	};
+
+	var dotProduct = function(row, col) {
+
+		var i = 0;
+
+		var dot = 0;
+
+		if (row.length === col.length) {
+
+			for (i; i < row.length; i++) {
+
+				dot += (row[i] * col[i]);
+			};
+		};
+
+		return dot;
 	};
 
 	var upperTriangular = function(m) {
@@ -144,7 +170,8 @@ var mtrx = (function () {
 
 		var nums = '';
 
-		var i = 0, j = 0;
+		var i = 0, 
+			j = 0;
 
 		var rows = _getNumRows(m);
 
@@ -219,7 +246,8 @@ var mtrx = (function () {
 
 	var _createTriangularMatrix = function(m, type) {
 
-		var i = 0, j = 0;
+		var i = 0, 
+			j = 0;
 
 		var rows = _getNumRows(m);
 
@@ -260,9 +288,11 @@ var mtrx = (function () {
 
 		var size = 0;
 
-		var rows1 = _getNumRows(m1), cols1 = _getNumCols(m1);
+		var rows1 = _getNumRows(m1), 
+			cols1 = _getNumCols(m1);
 
-		var rows2 = _getNumRows(m2), cols2 = _getNumCols(m2);
+		var rows2 = _getNumRows(m2), 
+			cols2 = _getNumCols(m2);
 
 		var i = 0, j = 0;
 
@@ -295,7 +325,8 @@ var mtrx = (function () {
 
  		var vector = [];
 
- 		var i = 0, j = 0;
+ 		var i = 0, 
+ 			j = 0;
 
  		var rows = _getNumRows(m);
 
@@ -337,9 +368,11 @@ var mtrx = (function () {
 
 	var _getNumRows = function (m) {
 
+		var i = 0;
+
 		var rows = 0;
 
-		for (var i = 0; i < m.length; i++) {
+		for (i; i < m.length; i++) {
 
 			rows++;
 		};
@@ -349,19 +382,22 @@ var mtrx = (function () {
 
 	var _getNumCols = function (m) {
 
+		var i = 0;
+
 		var cols = 0;
 
-		for (var i = 0; i < m[0].length; i++) {
+		for (i; i < m[0].length; i++) {
 			
 			cols ++;
 		};
 
 		return cols;
-	}
+	};
 
 	var _assignValuesToMatrix = function (matrix, rows, cols) {
 
-		var i = 0, j = 0;
+		var i = 0, 
+			j = 0;
 
 		for (i; i < rows; i++) {
 
@@ -381,7 +417,8 @@ var mtrx = (function () {
 
 	var _isSymmetricMatrix = function(m) {
 
-		var i = 0, j = 0;
+		var i = 0, 
+			j = 0;
 
 		var rows = _getNumRows(m);
 
@@ -430,6 +467,7 @@ var mtrx = (function () {
 		scalar: scalar,
 		trace: trace,
 		transpose: transpose,
+		dotProduct: dotProduct,
 		upperTriangular: upperTriangular,
 		lowerTriangular: lowerTriangular,
 		rowVector: rowVector,
