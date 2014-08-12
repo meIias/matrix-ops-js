@@ -618,9 +618,12 @@ var mtrx = (function () {
 
 			while (i < rows && j < cols) {
 
-				if (m[i][j] !== m[++i][++j]) {
+				if (m[i+1] && m[j+1]) {
 
-					return false;
+					if (m[i][j] !== m[i+1][j+1]) {
+
+						return false;
+					};
 				};
 
 				i++;
@@ -630,6 +633,8 @@ var mtrx = (function () {
 
 			return true;			
 		};
+
+		return false;
 	};
 
 	var _isSquareMatrix = function (m) {
@@ -642,7 +647,7 @@ var mtrx = (function () {
 	};
 
 	return {
-
+		
 		create: create,
 		identity: identity,
 		scalar: scalar,
