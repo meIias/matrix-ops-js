@@ -169,6 +169,77 @@ var mtrx = (function () {
 		return dot;
 	};
 
+	var reducedRowEchelonForm = function(m) {
+
+		var lead = 0;
+
+		var i = 0, j = 0, r = 0;
+
+		var temp = 0, value = 0;
+
+		var rows, cols;
+
+		rows = _getNumRows(m);
+
+		cols = _getNumCols(m);
+
+		if (rows >= cols) { return; };
+
+		for (r; r < rows; r++) {
+
+			if (cols <= lead ) {
+
+				return;
+			};
+
+			i = r;
+
+			while (m[i][lead] === 0) {
+
+				i++;
+
+				if (rows === i) {
+
+					i = r;
+
+					lead++;
+
+					if (cols === lead) {
+
+						return;
+					};
+				};
+			};
+
+			temp = m[i];
+			m[i] = m[r];
+			m[r] = temp;
+
+			value = m[r][lead];
+
+			for (j = 0; j < cols; j++) {
+
+				m[r][j] /=value;
+			};
+
+			for (i = 0; i < rows; i++) {
+
+				if (i === r) { continue; };
+
+				value = m[i][lead];
+
+				for (j = 0; j < cols; j++) {
+
+					m[i][j] -= value * m[r][j];
+				};
+			};
+
+			lead++;
+		};
+
+		return m;
+	};
+
 	var upperTriangular = function(m) {
 
 		return _createTriangularMatrix(m, 'upper');
@@ -430,7 +501,7 @@ var mtrx = (function () {
 
 			for (j; j < cols; j++) {
 
-				matrix[i][j] = Math.floor((Math.random() * 4) + 1);
+				matrix[i][j] = Math.floor((Math.random() * 9) + 1);
 			};
 
 			j = 0;
@@ -477,6 +548,85 @@ var mtrx = (function () {
 		return true;
 	};
 
+	var _isDiagonalMatrix = function(m) {
+
+		var i = 0, j = 0;
+
+		var rows = _getNumRows(m);
+
+		var cols = _getNumCols(m);
+
+		for (i; i < rows; i++) {
+
+			for (j; j < cols; j++) {
+
+				if (i !== j) {
+
+					if (m[i][j] !== 0) {
+
+						return false;
+					};
+				};
+			};
+
+			j = 0;
+		};
+
+		return true;
+	};
+
+	var _isZeroMatrix = function(m) {
+
+		var i = 0, j = 0;
+
+		var rows = _getNumRows(m);
+
+		var cols = _getNumCols(m);
+
+		for (i; i < rows; i++) {
+
+			for (j; j < cols; j++) {
+
+				if (m[i][j] !== 0) {
+
+					return false;
+				};
+			};
+
+			j = 0;
+		};
+
+		return true;
+	};
+
+	var _isScalarMatrix = function(m) {
+
+		var i = 0, j = 0;
+
+		var rows, cols;
+
+		if (_isDiagonalMatrix(m)) {
+
+			rows = _getNumRows(m);
+
+			cols = _getNumCols(m);
+
+			while (i < rows && j < cols) {
+
+				if (m[i][j] !== m[++i][++j]) {
+
+					return false;
+				};
+
+				i++;
+
+				j++;
+			};
+
+			return true;			
+		};
+	};
+
 	var _isSquareMatrix = function (m) {
 
 		var rows = _getNumRows(m);
@@ -495,6 +645,7 @@ var mtrx = (function () {
 		transpose: transpose,
 		product: product,
 		dotProduct: dotProduct,
+		reducedRowEchelonForm: reducedRowEchelonForm,
 		upperTriangular: upperTriangular,
 		lowerTriangular: lowerTriangular,
 		rowVector: rowVector,
