@@ -476,6 +476,8 @@ var mtrx = (function () {
 
 		var rows = 0;
 
+		if (!m) { return; };
+
 		for (i; i < m.length; i++) {
 
 			rows++;
@@ -489,6 +491,8 @@ var mtrx = (function () {
 		var i = 0;
 
 		var cols = 0;
+
+		if (!m) { return; };
 
 		for (i; i < m[0].length; i++) {
 			
@@ -647,7 +651,7 @@ var mtrx = (function () {
 	};
 
 	return {
-		
+
 		create: create,
 		identity: identity,
 		scalar: scalar,
