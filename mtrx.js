@@ -2,11 +2,16 @@ var mtrx = (function () {
 
 	"use strict";
 
-	var create = function (rows, cols) {
+	var create = function (input) {
 
-		var matrix = _buildMatrix(rows);
+		var matrix = input;
 
-		_assignValuesToMatrix(matrix, rows, cols);
+		if (!input) {
+
+			matrix = _buildMatrix(3);
+
+			_assignValuesToMatrix(matrix, 3, 3);
+		};
 
 		return matrix;
 	};
