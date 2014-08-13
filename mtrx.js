@@ -255,6 +255,20 @@ var mtrx = (function () {
 		return _createTriangularMatrix(m, 'lower');
 	};
 
+	var addRowToMatrix = function(m, row) {
+
+		if (row.length !== m[0].length) { return; };
+
+		return _augmentMatrix(m, row, 'row');
+	};
+
+	var addColumnToMatrix = function(m, col) {
+
+		if (col.length !== m.length) { return; };
+
+		return _augmentMatrix(m, col, 'col');
+	};
+
 	var rowVector = function(m, row) {
 
 		return _getVector(m, row, 'row');
@@ -350,6 +364,29 @@ var mtrx = (function () {
 		};
 
 		return matrix;
+	};
+
+	var _augmentMatrix = function(m, vector, type) {
+
+		var i = 0, j = 0;
+
+		var rows = _getNumRows(m);
+
+		var cols = _getNumCols(m);
+
+		if (type === 'row') {
+
+			m.push(vector);
+		}
+		else if (type === 'col') {
+
+			for (i; i < rows; i++) {
+
+				m[i].push(vector[i]);
+			}
+		}
+
+		return m;
 	};
 
 	var _createTriangularMatrix = function(m, type) {
@@ -662,6 +699,8 @@ var mtrx = (function () {
 		reducedRowEchelonForm: reducedRowEchelonForm,
 		upperTriangular: upperTriangular,
 		lowerTriangular: lowerTriangular,
+		addRowToMatrix: addRowToMatrix,
+		addColumnToMatrix: addColumnToMatrix,
 		rowVector: rowVector,
 		columnVector: columnVector,
 		add: add,
