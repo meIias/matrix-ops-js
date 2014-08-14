@@ -2,6 +2,11 @@ var mtrx = (function () {
 
     "use strict";
 
+    /**
+     * @description create -- builds a matrix out of the passed in values, or default values
+     * @param  {array} input -- takes in an array of arrays from the user, if null then provide a random 3x3 matrix by default
+     * @return {array}       returns the matrix
+     */
     var create = function (input) {
 
         var matrix = input;
@@ -16,6 +21,11 @@ var mtrx = (function () {
         return matrix;
     };
 
+    /**
+     * @description identity -- returns the identity matrix of the passed in matrix
+     * @param  {array} m -- the matrix passed in
+     * @return {array}   return the identity matrix of the passed in matrix
+     */
     var identity = function(m) {
 
         var i = 0, j = 0;
@@ -48,6 +58,12 @@ var mtrx = (function () {
         }
     };
 
+    /**
+     * @description Scalar -- multiply each value in the matrix by a number
+     * @param  {int,float} s -- the number to multiply each matrix element by
+     * @param  {array} m -- the matrix passed in
+     * @return {array}   returns the matrix scaled by the value s
+     */
     var scalar = function(s, m) {
 
         var i = 0, j = 0;
@@ -69,6 +85,11 @@ var mtrx = (function () {
         return m;
     };
 
+    /**
+     * @description trace -- sum the matrix's diagonal
+     * @param  {array} m -- matrix (array of arrays)
+     * @return {int}   returns the sum of the diagonal of the matrix
+     */
     var trace = function(m) {
 
         var i = 0, j = 0, tr = 0;
@@ -98,6 +119,11 @@ var mtrx = (function () {
         }
     };
 
+    /**
+     * @description transpose matrix -- swap rows & cols
+     * @param  {array} m -- passed in array(matrix)
+     * @return {array}   returns the matrix with columns and rows switched. mxn -> nxm
+     */
     var transpose = function(m) {
 
         var matrix = [];
@@ -118,6 +144,12 @@ var mtrx = (function () {
         return matrix;
     };
 
+    /**
+     * @description matrix product -- multiply 2 matrices together
+     * @param  {array} m1 -- the first of two matrices to multiply together
+     * @param  {array} m2 -- the second matrix
+     * @return {array}    returns the new product of matrix 1 and 2
+     */
     var product = function(m1, m2) {
 
         var i = 0, j = 0;
@@ -157,6 +189,12 @@ var mtrx = (function () {
         return newMatrix;
     };
 
+    /**
+     * @description dotProduct -- multiplies 2 vectors together, not matrices(see product method)
+     * @param  {array} row -- single array of row values
+     * @param  {array} col -- single array of col values
+     * @return {int,float}     returns the multiplied row and column values
+     */
     var dotProduct = function(row, col) {
 
         var i = 0;
@@ -174,6 +212,11 @@ var mtrx = (function () {
         return dot;
     };
 
+    /********* This method is not working correctly, will need to come back to it
+     * @description reducedRowEchelonForm -- Algorithm courtesy of RosettaCode, returns the solutions to a system by a passed in augmented matrix
+     * @param  {array} m -- the augmented matrix to be reduced
+     * @return {array}   returns the matrix with identity on the left side and the last column is the solutions
+     */
     var reducedRowEchelonForm = function(m) {
 
         var lead = 0;
@@ -245,16 +288,32 @@ var mtrx = (function () {
         return m;
     };
 
+    /**
+     * @description upperTriangular -- a matrix with all values under the diagonal being zero
+     * @param  {array} m -- the matrix to have all values below diagonal become zero
+     * @return {array}   returns the upper triangular matrix
+     */
     var upperTriangular = function(m) {
 
         return _createTriangularMatrix(m, 'upper');
     };
 
+    /**
+     * @description lowerTriangular -- a matrix with all values aboce diagonal being zero
+     * @param  {array} m -- the matrix to be converted to lower triangular
+     * @return {array}   return the lower triangular matrix
+     */
     var lowerTriangular = function(m) {
 
         return _createTriangularMatrix(m, 'lower');
     };
 
+    /**
+     * @description addRowToMatrix -- adds a row to the already existing matrix
+     * @param {array} m   -- the matrix to be augmented
+     * @param {array} row -- the new row to be added
+     * @return {array} returns the newly augmented matrix
+     */
     var addRowToMatrix = function(m, row) {
 
         if (row.length !== m[0].length) { return; }
@@ -262,6 +321,12 @@ var mtrx = (function () {
         return _augmentMatrix(m, row, 'row');
     };
 
+    /**
+     * @description addColumnToMatrix -- adds a column to the existing matrix
+     * @param {array} m  -- the passed in matrix to modify
+     * @param {array} col -- the new column to be added
+     * @return {array} returns the passed in matrix with a new column added
+     */
     var addColumnToMatrix = function(m, col) {
 
         if (col.length !== m.length) { return; }
@@ -269,26 +334,55 @@ var mtrx = (function () {
         return _augmentMatrix(m, col, 'col');
     };
 
+    /**
+     * @description rowVector -- returns a row vector based on the specified row number
+     * @param  {array} m   -- the matrix whose values will be accessed
+     * @param  {int} row -- the row number that the user wants(zero indexed)
+     * @return {array}     return the array of the specified row
+     */
     var rowVector = function(m, row) {
 
         return _getVector(m, row, 'row');
     };
 
+    /**
+     * @description columnVector -- returns the column specified of the matrix
+     * @param  {array} m   -- the matrix being accessed
+     * @param  {int} col -- the column number
+     * @return {array}     returns the column array asked for
+     */
     var columnVector = function(m, col) {
 
         return _getVector(m, col, 'col');
     };
 
+    /**
+     * @description add -- adds two matrices together
+     * @param {array} m1 -- the first matrix
+     * @param {array} m2  -- the second matrix to add
+     * @return {array}  returns the matrix of the sum of each corresponding element
+     */
     var add = function(m1,m2) {
 
         return _arithmeticOnMatrix(m1,m2, '+');
     };
 
+    /**
+     * @description subtract -- subtracts two matrices
+     * @param  {array} m1 -- the first array
+     * @param  {array} m2 -- second array
+     * @return {array}    returns the array with each corresponding element subtracted
+     */
     var subtract = function(m1,m2) {
 
         return _arithmeticOnMatrix(m1,m2,'-');
     };
 
+    /**
+     * @description print -- prints out the array in a matrix fashion
+     * @param  {array} m -- the matrix to be printed
+     * @return {string}   returns a string of the matrix with the proper newlines and columns
+     */
     var print = function (m) {
 
         var nums = '';
@@ -319,6 +413,12 @@ var mtrx = (function () {
         return "empty matrix!";
     };
 
+    /**
+     * @description equal -- checks if two matrices are equal
+     * @param  {array} m1 -- first array
+     * @param  {array} m2 -- second array to test with first
+     * @return {bool}    returns true if equal, false otherwise
+     */
     var equal = function(m1, m2) {
 
         var i = 0, j = 0;
@@ -352,6 +452,11 @@ var mtrx = (function () {
         return true;        
     };
 
+    /**
+     * @description _buildMatrix -- first part of creating the matrix, specifies how many rows will be in the matrix
+     * @param  {int} rows -- the number of rows
+     * @return {array}      returns an array with length of rows
+     */
     var _buildMatrix = function (rows) {
 
         var matrix = [];
@@ -366,6 +471,13 @@ var mtrx = (function () {
         return matrix;
     };
 
+    /**
+     * @description _augmentMatrix -- method to help add a row or col to the matrix
+     * @param  {array} m      -- the matrix to augment
+     * @param  {array} vector -- the row or column to add
+     * @param  {string} type   -- specifies whether a row or col is being added
+     * @return {array}        returns the matrix with the new row or col
+     */
     var _augmentMatrix = function(m, vector, type) {
 
         var i = 0, j = 0;
@@ -389,6 +501,12 @@ var mtrx = (function () {
         return m;
     };
 
+    /**
+     * @description _createTriangularMatrix -- method used to help build a lower or upper triangular matrix
+     * @param  {array} m    -- the matrix to be converted to a triangular matrix
+     * @param  {string} type -- specifies whether it will be a lower or upper triangular
+     * @return {array}      returns the triangular matrix
+     */
     var _createTriangularMatrix = function(m, type) {
 
         var i = 0, j = 0;
@@ -426,6 +544,13 @@ var mtrx = (function () {
         }
     };
 
+    /**
+     * @description _arithmeticOnMatrix -- method to help and and subtract matrix values
+     * @param  {array} m1 -- the first matrix
+     * @param  {array} m2 -- the matrix being added to the first
+     * @param  {char} op -- operator specifing + for add and - for subtract
+     * @return {array}    returns the array with the added/subtraction results
+     */
     var _arithmeticOnMatrix = function(m1, m2, op) {
 
         var newMatrix = [];
@@ -463,6 +588,13 @@ var mtrx = (function () {
         }
     };
 
+    /**
+     * @description _getVector -- gets the vector of the specified row or column
+     * @param  {array} m     -- the matrix to get the vector from
+     * @param  {int} which -- specifies which zero indexed column or row to grab
+     * @param  {string} type  -- specifies if its a column or row
+     * @return {array}       returns the column or row vector, single
+     */
     var _getVector = function(m, which, type) {
 
         var vector = [];
@@ -507,6 +639,11 @@ var mtrx = (function () {
         return vector;
     };
 
+    /**
+     * @description _getNumRows -- helper method to get the number of rows in the passed in matrix
+     * @param  {array} m -- the matrix in question
+     * @return {int}   the number of rows for that matrix
+     */
     var _getNumRows = function (m) {
 
         var i = 0;
@@ -523,6 +660,11 @@ var mtrx = (function () {
         return rows;
     };
 
+    /**
+     * @description _getNumCols -- helper method to get num of columns in the passed in matrix
+     * @param  {array} m -- the matrix
+     * @return {int}   the number of columns in that matrix
+     */
     var _getNumCols = function (m) {
 
         var i = 0;
@@ -539,6 +681,13 @@ var mtrx = (function () {
         return cols;
     };
 
+    /**
+     * @description _assignValuesToMatrix -- builds a 3x3 matrix full of random values if user doesn't pass in an array on create
+     * @param  {array} matrix -- the array to receive more arrays as elements
+     * @param  {int} rows   -- the number of rows to add
+     * @param  {int} cols   -- the number of cols to add
+     * @return {array}        returns the built matrix with random values between 1-10
+     */
     var _assignValuesToMatrix = function (matrix, rows, cols) {
 
         var i = 0, j = 0;
@@ -559,6 +708,11 @@ var mtrx = (function () {
         return m.length === 0;
     };
 
+    /**
+     * @description _isSymmetricMatrix -- checks if matrix === it's transpose (swap rows and columns yields the same matrix)
+     * @param  {array}  m -- the matrix to transpose and compare
+     * @return {Boolean}   returns true if it is symmetric
+     */
     var _isSymmetricMatrix = function(m) {
 
         var i = 0, j = 0;
@@ -594,6 +748,11 @@ var mtrx = (function () {
         return true;
     };
 
+    /**
+     * @description _isDiagonalMatrix -- checks if the only non-zero values in the matrix lie along the diagonal only
+     * @param  {array}  m -- the matrix to check
+     * @return {Boolean}   returns true if only non-zeros are in the diagonal of the matrix
+     */
     var _isDiagonalMatrix = function(m) {
 
         var i = 0, j = 0;
@@ -621,6 +780,11 @@ var mtrx = (function () {
         return true;
     };
 
+    /**
+     * @description _isZeroMatrix -- checks whether or not all values in the matrix are zero
+     * @param  {array}  m -- the matrix
+     * @return {Boolean}   returns true if all values in matrix are zero
+     */
     var _isZeroMatrix = function(m) {
 
         var i = 0, j = 0;
@@ -645,6 +809,11 @@ var mtrx = (function () {
         return true;
     };
 
+    /**
+     * @description _isScalarMatrix -- checks if all values along the diagonal are equal
+     * @param  {array}  m -- the matrix to check
+     * @return {Boolean}   returns true if all values in the diagonal are equal
+     */
     var _isScalarMatrix = function(m) {
 
         var i = 0, j = 0;
@@ -678,6 +847,11 @@ var mtrx = (function () {
         return false;
     };
 
+    /**
+     * @description _isSquareMatrix -- checks if rows === cols for matrix
+     * @param  {array}  m -- the matrix
+     * @return {Boolean}   returns true if same number of rows and columns
+     */
     var _isSquareMatrix = function (m) {
 
         var rows = _getNumRows(m);
