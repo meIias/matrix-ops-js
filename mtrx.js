@@ -1,3 +1,7 @@
+/**
+ * @description -- mtrx.js : a javascript matrix operation library
+ ***** github.com/meiias  *****
+ */
 var mtrx = (function () {
 
     "use strict";
@@ -86,6 +90,48 @@ var mtrx = (function () {
     };
 
     /**
+     * @description inverse -- WIP
+     * @param  {array} m -- the matrix
+     * @return {array}   returns the inverse of the passed in matrix
+     */
+    var inverse = function(m) {
+
+        var inverseMtx = [];
+
+        var i = 0, j = 0;
+
+        var factor = 0, coefficient = 0;
+
+        var rows = _getNumRows(m);
+
+        var inverseMtx = JSON.parse(JSON.stringify(m));
+
+        inverseMtx = identity(inverseMtx);
+
+        for (i; i < rows; i++) {
+
+            factor = m[i][i];
+
+            m[i] /= factor;
+
+            inverseMtx[i] /= factor;
+
+            for (j; j < rows; j++) {
+
+                if (i ===j) continue;
+
+                coefficient = m[j][i];
+
+                m[j] -= coefficient * m[i];
+
+                inverseMtx[j] -= coefficient * inverseMtx[i];
+            }
+        }
+
+        return inverseMtx;
+    };
+
+    /**
      * @description trace -- sum the matrix's diagonal
      * @param  {array} m -- matrix (array of arrays)
      * @return {int}   returns the sum of the diagonal of the matrix
@@ -166,6 +212,8 @@ var mtrx = (function () {
 
         var cols2 = _getNumCols(m2);
 
+        // mxn * nxr === mxr
+        // columns of the first matrix and rows of the second matrix should be equal to get a matrix product
         if (cols1 === rows2) {
 
             newMatrix = create(rows1, cols2);
@@ -212,7 +260,7 @@ var mtrx = (function () {
         return dot;
     };
 
-    /********* This method is not working correctly, will need to come back to it
+    /********* This method is not working correctly/confusing, will need to come back to it *********
      * @description reducedRowEchelonForm -- Algorithm courtesy of RosettaCode, returns the solutions to a system by a passed in augmented matrix
      * @param  {array} m -- the augmented matrix to be reduced
      * @return {array}   returns the matrix with identity on the left side and the last column is the solutions
@@ -650,7 +698,7 @@ var mtrx = (function () {
 
         var rows = 0;
 
-        if (!m) { return; };
+        if (!m) { return; }
 
         for (i; i < m.length; i++) {
 
@@ -671,7 +719,7 @@ var mtrx = (function () {
 
         var cols = 0;
 
-        if (!m) { return; };
+        if (!m) { return; }
 
         for (i; i < m[0].length; i++) {
             
@@ -709,7 +757,7 @@ var mtrx = (function () {
     };
 
     /**
-     * @description _isSymmetricMatrix -- checks if matrix === it's transpose (swap rows and columns yields the same matrix)
+     * @description _isSymmetricMatrix -- checks if matrix === it's transpose (swapping rows and columns yields the same matrix)
      * @param  {array}  m -- the matrix to transpose and compare
      * @return {Boolean}   returns true if it is symmetric
      */
@@ -866,6 +914,7 @@ var mtrx = (function () {
         create: create,
         identity: identity,
         scalar: scalar,
+        //inverse: inverse,
         trace: trace,
         transpose: transpose,
         product: product,
