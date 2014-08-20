@@ -1,5 +1,5 @@
 
-// normal matrix
+// augmented matrix
 var m1 = mtrx.create([
 
 	[1,2,3,6],
