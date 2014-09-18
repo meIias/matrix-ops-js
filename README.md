@@ -1,5 +1,5 @@
-#mtrx-js
-###***basic matrix operations library*** '*WIP* '
+#mtrx-js 
+***basic matrix operations library*** '*WIP* '
 
 ---
 
