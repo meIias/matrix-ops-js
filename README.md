@@ -1,9 +1,9 @@
-#mtrx-js 
+###mtrx-js
 ***basic matrix operations library*** '*WIP* '
 
 ---
 
-###mtrx.create( )
+####mtrx.create( )
 	var matrix = mtrx.create([
 		[0,1,2],
 		[3,4,5],
@@ -17,7 +17,7 @@
 	
 --
 
-###mtrx.identity( m )
+####mtrx.identity( m )
 >returns the identity matrix(1's along the diagonal) of the passed in matrix.
 
 	var matrix = mtrx.create();
@@ -25,7 +25,7 @@
 	
 --
 
-###mtrx.scalar( s , m )
+####mtrx.scalar( s , m )
 >multiplies all elements in the passed in matrix by the passed in  scalar.
 
 	var matrix = mtrx.create();
