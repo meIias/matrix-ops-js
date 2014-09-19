@@ -1,4 +1,4 @@
-#mtrx.js <br /> 
+###mtrx.js <br /> 
 ***basic matrix operations library*** '*WIP*'
 
 ---
@@ -200,7 +200,7 @@
 	var matrix1 = mtrx.create();
 	var matrix2 = mtrx.create();
 	
-	if (mtrx.equal(matrix1, matrix2) { 
+	if (mtrx.equal(matrix1, matrix2)) { 
 		//...
 	}
 	
