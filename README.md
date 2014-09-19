@@ -187,7 +187,7 @@
 #####mtrx.print ( m )
 > prints out the matrix in an ordered way.
 
-	var matrix1 = mtrx.create();
+	var matrix = mtrx.create();
 	alert(mtrx.print(matrix));
 	
 --
