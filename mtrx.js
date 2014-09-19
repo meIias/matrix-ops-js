@@ -34,7 +34,7 @@ var mtrx = (function () {
 
         var i = 0, j = 0;
 
-        var rows, 
+        var rows,
             cols;
 
         if (_isSquareMatrix(m)) {
@@ -55,7 +55,7 @@ var mtrx = (function () {
                     }
                 }
 
-                j = 0;              
+                j = 0;
             }
 
             return m;
@@ -180,7 +180,7 @@ var mtrx = (function () {
 
         var cols = _getNumCols(m);
 
-        matrix = create(cols, rows);
+        matrix = _createMatrix(cols, rows);
 
         for (i; i < cols; i++) {
 
@@ -216,7 +216,7 @@ var mtrx = (function () {
         // columns of the first matrix and rows of the second matrix should be equal to get a matrix product
         if (cols1 === rows2) {
 
-            newMatrix = create(rows1, cols2);
+            newMatrix = _createMatrix(rows1, cols2);
         }
         else { return; }
 
@@ -497,7 +497,7 @@ var mtrx = (function () {
             j = 0;
         }
 
-        return true;        
+        return true;
     };
 
     /**
@@ -513,7 +513,7 @@ var mtrx = (function () {
 
         for (i; i < rows; i++) {
 
-            matrix[i] = [];                 
+            matrix[i] = [];
         }
 
         return matrix;
@@ -547,6 +547,21 @@ var mtrx = (function () {
         }
 
         return m;
+    };
+
+    /**
+     * @description _createMatrix -- creates and initializes a matrix of the specific size
+     * @param  {int} rows -- num rows
+     * @param  {int} cols -- num cols
+     * @return {array}      return matrix of rows x cols
+     */
+    var _createMatrix = function(rows, cols) {
+
+        var matrix = _buildMatrix(rows);
+
+        _assignValuesToMatrix(matrix, rows, cols);
+
+        return matrix;
     };
 
     /**
@@ -613,10 +628,10 @@ var mtrx = (function () {
 
         if ( rows1 === rows2 && cols1 === cols2) {
 
-            newMatrix = create(rows1, cols1);
+            newMatrix = _createMatrix(rows1, cols1);
 
             for (i; i < rows1 ; i++) {
-                
+
                 for (j; j < cols1; j++) {
 
                     if (op === '+') {
@@ -625,8 +640,8 @@ var mtrx = (function () {
                     }
                     else if (op === '-') {
 
-                        newMatrix[i][j] = m1[i][j] - m2[i][j];                          
-                    }       
+                        newMatrix[i][j] = m1[i][j] - m2[i][j];
+                    }
                 }
 
                 j = 0;
@@ -722,7 +737,7 @@ var mtrx = (function () {
         if (!m) { return; }
 
         for (i; i < m[0].length; i++) {
-            
+
             cols ++;
         }
 
@@ -889,7 +904,7 @@ var mtrx = (function () {
                 j++;
             }
 
-            return true;            
+            return true;
         }
 
         return false;
@@ -906,7 +921,7 @@ var mtrx = (function () {
 
         var cols = _getNumCols(m);
 
-        return rows === cols;       
+        return rows === cols;
     };
 
     return {
