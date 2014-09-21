@@ -947,3 +947,5 @@ var mtrx = (function () {
         equal: equal
     };
 }());
+
+module.exports = mtrx;

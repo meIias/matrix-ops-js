@@ -1,0 +1,29 @@
+{
+  "name": "mtrx-ops",
+  "version": "0.0.1",
+  "description": "A basic matrix operations library",
+  "main": "mtrx.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meIias/mtrx-js.git"
+  },
+  "keywords": [
+    "matrix",
+    "linear",
+    "algebra",
+    "matrices",
+    "math",
+    "vector",
+    "dot",
+    "product"
+  ],
+  "author": "melias <moeelias@gmail.com> (https://github.com/meIias)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/meIias/mtrx-js/issues"
+  },
+  "homepage": "https://github.com/meIias/mtrx-js"
+}
