@@ -2,6 +2,11 @@
 ***basic matrix operations library*** '*WIP*'
 
 ---
+<br/>
+####Install
+	npm install mtrx-ops
+	
+	var mtrx = require('mtrx-ops');
 
 <br/>
 <br />
