@@ -4,9 +4,9 @@
 ---
 <br/>
 ####Install
-	npm install mtrx-ops
+	npm install matrix-ops
 	
-	var mtrx = require('mtrx-ops');
+	var mtrx = require('matrix-ops');
 
 <br/>
 <br />

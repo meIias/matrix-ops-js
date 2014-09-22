@@ -1,6 +1,6 @@
 {
-  "name": "mtrx-ops",
-  "version": "0.0.2",
+  "name": "matrix-ops",
+  "version": "0.0.4",
   "description": "A basic matrix operations library",
   "main": "mtrx.js",
   "scripts": {
