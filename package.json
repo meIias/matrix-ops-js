@@ -1,14 +1,14 @@
 {
   "name": "matrix-ops",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A basic matrix operations library",
-  "main": "mtrx.js",
+  "main": "matrix-ops.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/meIias/mtrx-js.git"
+    "url": "https://github.com/meIias/matrix-ops-js.git"
   },
   "keywords": [
     "matrix",
@@ -23,7 +23,7 @@
   "author": "melias <moeelias@gmail.com> (https://github.com/meIias)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/meIias/mtrx-js/issues"
+    "url": "https://github.com/meIias/matrix-ops-js/issues"
   },
-  "homepage": "https://github.com/meIias/mtrx-js"
+  "homepage": "https://github.com/meIias/matrix-ops-js"
 }
