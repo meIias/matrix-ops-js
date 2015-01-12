@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/matrix-ops.svg)](http://badge.fury.io/js/matrix-ops)
+
 ###matrix-ops.js <br /> 
 ***basic matrix operations library*** '*WIP*'
 
@@ -24,7 +26,7 @@
 	//generates a random 3x3 matrix if nothing is passed in.
 	var m = matrix.create();
 	
---
+---
 
 <br />
 
@@ -44,7 +46,7 @@
 	var m = matrix.create();
 	m = matrix.scalar(5, m);
 
---
+---
 
 <br />
 
@@ -54,7 +56,7 @@
 	var m = matrix.create();
 	var tr = matrix.trace(m);
 	
---
+---
 
 <br />
 
@@ -64,7 +66,7 @@
 	var m = matrix.create();
 	m = matrix.transpose(m);
 
---
+---
 
 <br />
 
@@ -75,7 +77,7 @@
 	var matrix2 = matrix.create();
 	var matrixProduct = matrix.product(matrix1, matrix2);
 	
---
+---
 
 <br />
 
@@ -87,7 +89,7 @@
 	var vector2 = [4,5,6];
 	var dot = matrix.dotProduct(vector1, vector2); // should be 29
 	
---
+---
 
 <br />
 
@@ -102,7 +104,7 @@
 	
 	var reduced = matrix.reducedRowEchelonForm(m);
 
---
+---
 
 <br />
 
@@ -112,7 +114,7 @@
 	var m = matrix.create();
 	m = matrix.upperTriangular(m);
 	
---
+---
 
 <br />
 
@@ -122,7 +124,7 @@
 	var m = matrix.create();
 	m = matrix.lowerTriangular(m);
 
---
+---
 
 <br />
 
@@ -132,7 +134,7 @@
 	var m = matrix.create();
 	m = matrix.addRowToMatrix(m, [1,2,3]);
 
---
+---
 
 <br />
 
@@ -142,7 +144,7 @@
 	var m = matrix.create();
 	m = matrix.addColumnToMatrix(m, [1,2,3]);
 
---
+---
 
 <br />
 	
@@ -152,7 +154,7 @@
 	var m = matrix.create();
 	var row = matrix.rowVector(m, 0); // returns first row
 
---
+---
 
 <br />
 	
@@ -162,7 +164,7 @@
 	var m = matrix.create();
 	var row = matrix.columnVector(m, 0); // returns first column
 	
---
+---
 
 <br />
 	
@@ -174,7 +176,7 @@
 	var matrix2 = matrix.create();
 	var row = matrix.add(matrix1, matrix2);
 
---
+---
 
 <br />
 	
@@ -186,17 +188,16 @@
 	var matrix2 = matrix.create();
 	var row = matrix.subtract(matrix1, matrix2);
 
---
+---
 
 <br />
 	
 #####matrix.print ( m )
 > prints out the matrix in an ordered way.
 
-	var m = matrix.create();
 	alert(matrix.print(m));
 	
---
+---
 
 <br />
 	
