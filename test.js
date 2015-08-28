@@ -1,36 +1,12 @@
 
-// augmented matrix
-var m1 = mtrx.create([
+'use strict';
 
-	[1,2,3,6],
-	[4,5,6,7],
-	[7,3,4,11]
-	
-]);
+var should = require('should');
+var matrix = require('./matrix-ops');
 
-// diagonal matrix
-var m2 = mtrx.create([
-
-	[1,0,0],
-	[0,5,0],
-	[0,0,9]
-	
-]);
-
-// scalar matrix
-var m3 = mtrx.create([
-
-	[5,0,0],
-	[0,5,0],
-	[0,0,5]
-	
-]);
-
-// zero matrix
-var m4 = mtrx.create([
-
-	[0,0,0],
-	[0,0,0],
-	[0,0,0]
-	
-]);
+describe('matrix-ops', function() {
+  it('should create a new matrix', function() {
+    var m = matrix.create();
+    m.length.should.not.equal(null);
+  });
+});
