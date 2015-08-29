@@ -226,11 +226,11 @@ mtrx.product = function(m1, m2) {
 
     for (j; j < cols2; j++) {
 
-      rowDot = rowVector(m1, i);
+      rowDot = this.rowVector(m1, i);
 
-      colDot = columnVector(m2, j);
+      colDot = this.columnVector(m2, j);
 
-      newMatrix[i][j] = dotProduct(rowDot, colDot);
+      newMatrix[i][j] = this.dotProduct(rowDot, colDot);
     }
 
     j = 0;
@@ -262,8 +262,9 @@ mtrx.dotProduct = function(row, col) {
   return dot;
 };
 
-/********* This method is not working correctly/confusing, will need to come back to it *********
- * @description reducedRowEchelonForm -- Algorithm courtesy of RosettaCode, returns the solutions to a system by a passed in augmented matrix
+/*
+ * buggy, don't use
+ * @description reducedRowEchelonForm -- returns the solutions to a system by a passed in augmented matrix
  * @param  {array} m -- the augmented matrix to be reduced
  * @return {array}   returns the matrix with identity on the left side and the last column is the solutions
  */
