@@ -32,7 +32,11 @@ mtrx.create = function (input) {
  * @param  {array} m -- the matrix passed in
  * @return {array}   return the identity matrix of the passed in matrix
  */
-mtrx.identity = function(m) {
+mtrx.identity = function(matrix) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
 
   var i = 0, j = 0;
 
@@ -70,7 +74,12 @@ mtrx.identity = function(m) {
  * @param  {array} m -- the matrix passed in
  * @return {array}   returns the matrix scaled by the value s
  */
-mtrx.scalar = function(s, m) {
+mtrx.scalar = function(s, matrix) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
+
 
   var i = 0, j = 0;
 
@@ -96,7 +105,12 @@ mtrx.scalar = function(s, m) {
  * @param  {array} m -- the matrix
  * @return {array}   returns the inverse of the passed in matrix
  */
-mtrx.inverse = function(m) {
+mtrx.inverse = function(matrix) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
+
 
   var inverseMtx = [];
 
@@ -106,9 +120,9 @@ mtrx.inverse = function(m) {
 
   var rows = _getNumRows(m);
 
-  var inverseMtx = JSON.parse(JSON.stringify(m));
+  inverseMtx = JSON.parse(JSON.stringify(m));
 
-  inverseMtx = identity(inverseMtx);
+  inverseMtx = this.identity(inverseMtx);
 
   for (i; i < rows; i++) {
 
@@ -138,7 +152,12 @@ mtrx.inverse = function(m) {
  * @param  {array} m -- matrix (array of arrays)
  * @return {int}   returns the sum of the diagonal of the matrix
  */
-mtrx.trace = function(m) {
+mtrx.trace = function(matrix) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
+
 
   var i = 0, j = 0, tr = 0;
 
@@ -268,7 +287,12 @@ mtrx.dotProduct = function(row, col) {
  * @param  {array} m -- the augmented matrix to be reduced
  * @return {array}   returns the matrix with identity on the left side and the last column is the solutions
  */
-mtrx.reducedRowEchelonForm = function(m) {
+mtrx.reducedRowEchelonForm = function(matrix) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
+
 
   var lead = 0;
 
@@ -323,7 +347,7 @@ mtrx.reducedRowEchelonForm = function(m) {
 
     for (i = 0; i < rows; i++) {
 
-      if (i === r) { continue; };
+      if (i === r) { continue; }
 
       value = m[i][lead];
 
@@ -344,7 +368,12 @@ mtrx.reducedRowEchelonForm = function(m) {
  * @param  {array} m -- the matrix to have all values below diagonal become zero
  * @return {array}   returns the upper triangular matrix
  */
-mtrx.upperTriangular = function(m) {
+mtrx.upperTriangular = function(matrix) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
+
 
   return _createTriangularMatrix(m, 'upper');
 };
@@ -354,7 +383,12 @@ mtrx.upperTriangular = function(m) {
  * @param  {array} m -- the matrix to be converted to lower triangular
  * @return {array}   return the lower triangular matrix
  */
-mtrx.lowerTriangular = function(m) {
+mtrx.lowerTriangular = function(matrix) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
+
 
   return _createTriangularMatrix(m, 'lower');
 };
@@ -365,7 +399,12 @@ mtrx.lowerTriangular = function(m) {
  * @param {array} row -- the new row to be added
  * @return {array} returns the newly augmented matrix
  */
-mtrx.addRowToMatrix = function(m, row) {
+mtrx.addRowToMatrix = function(matrix, row) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
+
 
   if (row.length !== m[0].length) { return; }
 
@@ -378,7 +417,12 @@ mtrx.addRowToMatrix = function(m, row) {
  * @param {array} col -- the new column to be added
  * @return {array} returns the passed in matrix with a new column added
  */
-var addColumnToMatrix = function(m, col) {
+var addColumnToMatrix = function(matrix, col) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
+
 
   if (col.length !== m.length) { return; }
 
@@ -391,7 +435,12 @@ var addColumnToMatrix = function(m, col) {
  * @param  {int} row -- the row number that the user wants(zero indexed)
  * @return {array}     return the array of the specified row
  */
-mtrx.rowVector = function(m, row) {
+mtrx.rowVector = function(matrix, row) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
+
 
   return _getVector(m, row, 'row');
 };
@@ -402,7 +451,12 @@ mtrx.rowVector = function(m, row) {
  * @param  {int} col -- the column number
  * @return {array}     returns the column array asked for
  */
-mtrx.columnVector = function(m, col) {
+mtrx.columnVector = function(matrix, col) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
+
 
   return _getVector(m, col, 'col');
 };
@@ -413,7 +467,15 @@ mtrx.columnVector = function(m, col) {
  * @param {array} m2  -- the second matrix to add
  * @return {array}  returns the matrix of the sum of each corresponding element
  */
-mtrx.add = function(m1,m2) {
+mtrx.add = function(matrix1,matrix2) {
+
+  var m1 = matrix1.map(function(arr) {
+    return arr.slice();
+  });
+
+  var m2 = matrix2.map(function(arr) {
+    return arr.slice();
+  });
 
   return _arithmeticOnMatrix(m1,m2, '+');
 };
@@ -424,7 +486,15 @@ mtrx.add = function(m1,m2) {
  * @param  {array} m2 -- second array
  * @return {array}    returns the array with each corresponding element subtracted
  */
-mtrx.subtract = function(m1,m2) {
+mtrx.subtract = function(matrix1,matrix2) {
+
+  var m1 = matrix1.map(function(arr) {
+    return arr.slice();
+  });
+
+  var m2 = matrix2.map(function(arr) {
+    return arr.slice();
+  });
 
   return _arithmeticOnMatrix(m1,m2,'-');
 };
@@ -434,7 +504,11 @@ mtrx.subtract = function(m1,m2) {
  * @param  {array} m -- the matrix to be printed
  * @return {string}   returns a string of the matrix with the proper newlines and columns
  */
-mtrx.print = function (m) {
+mtrx.print = function (matrix) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
 
   var nums = '';
 
@@ -470,7 +544,15 @@ mtrx.print = function (m) {
  * @param  {array} m2 -- second array to test with first
  * @return {bool}    returns true if equal, false otherwise
  */
-mtrx.equal = function(m1, m2) {
+mtrx.equal = function(matrix1, matrix2) {
+
+  var m1 = matrix1.map(function(arr) {
+    return arr.slice();
+  });
+
+  var m2 = matrix2.map(function(arr) {
+    return arr.slice();
+  });
 
   var i = 0, j = 0;
 
@@ -520,7 +602,7 @@ function _buildMatrix (rows) {
   }
 
   return matrix;
-};
+}
 
 /**
  * @description _augmentMatrix -- method to help add a row or col to the matrix
@@ -529,7 +611,11 @@ function _buildMatrix (rows) {
  * @param  {string} type   -- specifies whether a row or col is being added
  * @return {array}        returns the matrix with the new row or col
  */
-function _augmentMatrix (m, vector, type) {
+function _augmentMatrix (matrix, vector, type) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
 
   var i = 0, j = 0;
 
@@ -550,7 +636,7 @@ function _augmentMatrix (m, vector, type) {
   }
 
   return m;
-};
+}
 
 /**
  * @description _createMatrix -- creates and initializes a matrix of the specific size
@@ -562,10 +648,10 @@ function _createMatrix (rows, cols) {
 
   var matrix = _buildMatrix(rows);
 
-  _assignValuesToMatrix(matrix, rows, cols);
+  _assignValuesToMatrix(JSON.parse(JSON.stringify(matrix)), rows, cols);
 
   return matrix;
-};
+}
 
 /**
  * @description _createTriangularMatrix -- method used to help build a lower or upper triangular matrix
@@ -573,7 +659,11 @@ function _createMatrix (rows, cols) {
  * @param  {string} type -- specifies whether it will be a lower or upper triangular
  * @return {array}      returns the triangular matrix
  */
-function _createTriangularMatrix (m, type) {
+function _createTriangularMatrix (matrix, type) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
 
   var i = 0, j = 0;
 
@@ -608,7 +698,7 @@ function _createTriangularMatrix (m, type) {
 
     return m;
   }
-};
+}
 
 /**
  * @description _arithmeticOnMatrix -- method to help and and subtract matrix values
@@ -617,7 +707,15 @@ function _createTriangularMatrix (m, type) {
  * @param  {char} op -- operator specifing + for add and - for subtract
  * @return {array}    returns the array with the added/subtraction results
  */
-function _arithmeticOnMatrix (m1, m2, op) {
+function _arithmeticOnMatrix (matrix1, matrix2, op) {
+
+  var m1 = matrix1.map(function(arr) {
+    return arr.slice();
+  });
+
+  var m2 = matrix2.map(function(arr) {
+    return arr.slice();
+  });
 
   var newMatrix = [];
 
@@ -652,7 +750,7 @@ function _arithmeticOnMatrix (m1, m2, op) {
 
     return newMatrix;
   }
-};
+}
 
 /**
  * @description _getVector -- gets the vector of the specified row or column
@@ -661,7 +759,11 @@ function _arithmeticOnMatrix (m1, m2, op) {
  * @param  {string} type  -- specifies if its a column or row
  * @return {array}       returns the column or row vector, single
  */
-function _getVector (m, which, type) {
+function _getVector (matrix, which, type) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
 
   var vector = [];
 
@@ -703,14 +805,18 @@ function _getVector (m, which, type) {
   }
 
   return vector;
-};
+}
 
 /**
  * @description _getNumRows -- helper method to get the number of rows in the passed in matrix
  * @param  {array} m -- the matrix in question
  * @return {int}   the number of rows for that matrix
  */
-function _getNumRows (m) {
+function _getNumRows (matrix) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
 
   var i = 0;
 
@@ -724,14 +830,18 @@ function _getNumRows (m) {
   }
 
   return rows;
-};
+}
 
 /**
  * @description _getNumCols -- helper method to get num of columns in the passed in matrix
  * @param  {array} m -- the matrix
  * @return {int}   the number of columns in that matrix
  */
-function _getNumCols (m) {
+function _getNumCols (matrix) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
 
   var i = 0;
 
@@ -745,7 +855,7 @@ function _getNumCols (m) {
   }
 
   return cols;
-};
+}
 
 /**
  * @description _assignValuesToMatrix -- builds a 3x3 matrix full of random values if user doesn't pass in an array on create
@@ -767,19 +877,23 @@ function _assignValuesToMatrix (matrix, rows, cols) {
 
     j = 0;
   }
-};
+}
 
 function _isMatrixEmpty (m) {
 
   return m.length === 0;
-};
+}
 
 /**
  * @description _isSymmetricMatrix -- checks if matrix === it's transpose (swapping rows and columns yields the same matrix)
  * @param  {array}  m -- the matrix to transpose and compare
  * @return {Boolean}   returns true if it is symmetric
  */
-function _isSymmetricMatrix (m) {
+function _isSymmetricMatrix (matrix) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
 
   var i = 0, j = 0;
 
@@ -787,7 +901,7 @@ function _isSymmetricMatrix (m) {
 
   var cols = _getNumCols(m);
 
-  var transposedMatrix = transpose(m);
+  var transposedMatrix = this.transpose(m);
 
   var transposeRows = _getNumRows(transposedMatrix);
 
@@ -812,14 +926,18 @@ function _isSymmetricMatrix (m) {
   }
 
   return true;
-};
+}
 
 /**
  * @description _isDiagonalMatrix -- checks if the only non-zero values in the matrix lie along the diagonal only
  * @param  {array}  m -- the matrix to check
  * @return {Boolean}   returns true if only non-zeros are in the diagonal of the matrix
  */
-function _isDiagonalMatrix (m) {
+function _isDiagonalMatrix (matrix) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
 
   var i = 0, j = 0;
 
@@ -844,14 +962,18 @@ function _isDiagonalMatrix (m) {
   }
 
   return true;
-};
+}
 
 /**
  * @description _isZeroMatrix -- checks whether or not all values in the matrix are zero
  * @param  {array}  m -- the matrix
  * @return {Boolean}   returns true if all values in matrix are zero
  */
-function _isZeroMatrix (m) {
+function _isZeroMatrix (matrix) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
 
   var i = 0, j = 0;
 
@@ -873,14 +995,18 @@ function _isZeroMatrix (m) {
   }
 
   return true;
-};
+}
 
 /**
  * @description _isScalarMatrix -- checks if all values along the diagonal are equal
  * @param  {array}  m -- the matrix to check
  * @return {Boolean}   returns true if all values in the diagonal are equal
  */
-function _isScalarMatrix (m) {
+function _isScalarMatrix (matrix) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
 
   var i = 0, j = 0;
 
@@ -911,20 +1037,24 @@ function _isScalarMatrix (m) {
   }
 
   return false;
-};
+}
 
 /**
  * @description _isSquareMatrix -- checks if rows === cols for matrix
  * @param  {array}  m -- the matrix
  * @return {Boolean}   returns true if same number of rows and columns
  */
-function _isSquareMatrix (m) {
+function _isSquareMatrix (matrix) {
+
+  var m = matrix.map(function(arr) {
+    return arr.slice();
+  });
 
   var rows = _getNumRows(m);
 
   var cols = _getNumCols(m);
 
   return rows === cols;
-};
+}
 
 module.exports = mtrx;
